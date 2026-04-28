@@ -40,7 +40,7 @@ final class PixelNoticeBoardView: NSView {
     drawPixelRect(NSRect(x: paperRect.minX + 18, y: paperRect.maxY - 34, width: 13, height: 13), color(0xe95b4f))
     drawPixelRect(NSRect(x: paperRect.maxX - 31, y: paperRect.maxY - 34, width: 13, height: 13), color(0xe95b4f))
 
-    let textRect = paperRect.insetBy(dx: 58, dy: 34)
+    let textRect = paperRect.insetBy(dx: 48, dy: 52)
     drawFittingText(message, in: textRect, color: ink)
   }
 
@@ -56,7 +56,7 @@ final class PixelNoticeBoardView: NSView {
       .replacingOccurrences(of: "，", with: "，")
       .trimmingCharacters(in: .whitespacesAndNewlines)
 
-    var size: CGFloat = rect.width > 640 ? 34 : 28
+    var size: CGFloat = rect.width > 520 ? 28 : 24
     var attributes: [NSAttributedString.Key: Any] = [:]
     var measured = NSRect.zero
 
@@ -81,7 +81,7 @@ final class PixelNoticeBoardView: NSView {
       x: rect.minX,
       y: rect.midY - measured.height / 2,
       width: rect.width,
-      height: max(rect.height, measured.height)
+      height: measured.height + 6
     )
     (cleaned as NSString).draw(
       with: drawRect,

@@ -166,7 +166,7 @@ final class BedtimeController {
       let key = "\(token)-\(warning.minutes)"
       if delta >= 0, delta < tickInterval + 1, !firedWarningKeys.contains(key) {
         firedWarningKeys.insert(key)
-        windows.showBedtimeReminder(message: text(warning.key), duration: 30)
+        windows.showBedtimeReminder(message: text(warning.key), duration: 10)
       }
     }
   }

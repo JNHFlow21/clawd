@@ -226,14 +226,14 @@ final class WindowCoordinator {
     bedtimeContexts.removeAll()
   }
 
-  func showBedtimeReminder(message: String, duration: TimeInterval = 30) {
+  func showBedtimeReminder(message: String, duration: TimeInterval = 10) {
     hideBedtimeReminder()
 
     for screen in NSScreen.screens {
       let visibleFrame = screen.visibleFrame
       let size = NSSize(
-        width: min(820, max(360, visibleFrame.width - 96)),
-        height: min(310, max(210, visibleFrame.height * 0.28))
+        width: min(640, max(360, visibleFrame.width * 0.42)),
+        height: min(230, max(170, visibleFrame.height * 0.2))
       )
       let origin = NSPoint(
         x: visibleFrame.midX - size.width / 2,
