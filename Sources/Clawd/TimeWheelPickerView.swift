@@ -39,8 +39,6 @@ final class TimeWheelPickerView: NSView {
     addSubview(hourLabel)
     addSubview(colonLabel)
     addSubview(minuteLabel)
-    addSubview(hourStepper)
-    addSubview(minuteStepper)
     updateLabels()
   }
 
@@ -51,24 +49,34 @@ final class TimeWheelPickerView: NSView {
 
   override func layout() {
     super.layout()
-    hourLabel.frame = NSRect(x: 8, y: 3, width: 32, height: 24)
-    colonLabel.frame = NSRect(x: 41, y: 3, width: 10, height: 24)
-    minuteLabel.frame = NSRect(x: 52, y: 3, width: 32, height: 24)
-    hourStepper.frame = NSRect(x: 88, y: 1, width: 19, height: 27)
-    minuteStepper.frame = NSRect(x: 112, y: 1, width: 19, height: 27)
+    hourLabel.frame = NSRect(x: 8, y: 3, width: 48, height: 24)
+    colonLabel.frame = NSRect(x: 58, y: 3, width: 18, height: 24)
+    minuteLabel.frame = NSRect(x: 78, y: 3, width: 48, height: 24)
   }
 
   override func scrollWheel(with event: NSEvent) {
-    if abs(event.scrollingDeltaX) > abs(event.scrollingDeltaY) {
-      adjustHour(event.scrollingDeltaX < 0 ? 1 : -1)
+    let localPoint = convert(event.locationInWindow, from: nil)
+    let rawDelta = abs(event.scrollingDeltaY) >= abs(event.scrollingDeltaX)
+      ? event.scrollingDeltaY
+      : -event.scrollingDeltaX
+    let direction = rawDelta < 0 ? 1 : -1
+    let ticks = min(6, max(1, Int(round(abs(rawDelta) / 6))))
+
+    if localPoint.x < bounds.midX {
+      adjustHour(direction * ticks)
     } else {
-      adjustMinute(event.scrollingDeltaY < 0 ? 1 : -1)
+      let minuteStep = event.modifierFlags.contains(.shift) ? 15 : 5
+      adjustMinute(direction * ticks * minuteStep)
     }
+  }
+
+  override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+    true
   }
 
   private func configureLabel(_ label: NSTextField) {
     label.alignment = .center
-    label.font = .monospacedDigitSystemFont(ofSize: 16, weight: .heavy)
+    label.font = .monospacedDigitSystemFont(ofSize: 20, weight: .heavy)
     label.textColor = .white
     label.wantsLayer = true
     label.layer?.backgroundColor = NSColor.clear.cgColor
@@ -80,6 +88,7 @@ final class TimeWheelPickerView: NSView {
     stepper.maxValue = max
     stepper.increment = 1
     stepper.valueWraps = true
+    stepper.isHidden = true
     stepper.target = self
     stepper.action = #selector(stepperChanged(_:))
   }
@@ -89,17 +98,15 @@ final class TimeWheelPickerView: NSView {
   }
 
   private func adjustHour(_ delta: Int) {
-    var value = hourStepper.integerValue + delta
-    if value < 0 { value = 23 }
-    if value > 23 { value = 0 }
+    var value = (hourStepper.integerValue + delta) % 24
+    if value < 0 { value += 24 }
     hourStepper.integerValue = value
     updateLabels()
   }
 
   private func adjustMinute(_ delta: Int) {
-    var value = minuteStepper.integerValue + delta
-    if value < 0 { value = 59 }
-    if value > 59 { value = 0 }
+    var value = (minuteStepper.integerValue + delta) % 60
+    if value < 0 { value += 60 }
     minuteStepper.integerValue = value
     updateLabels()
   }

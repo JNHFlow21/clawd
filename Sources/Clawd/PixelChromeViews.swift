@@ -121,10 +121,11 @@ final class PixelSettingsBackgroundView: NSView {
     color(0x0b1117).setFill()
     dirtyRect.fill()
 
-    let card = NSRect(x: 20, y: 82, width: bounds.width - 40, height: bounds.height - 104)
+    let card = NSRect(x: 16, y: 78, width: bounds.width - 32, height: bounds.height - 96)
     drawPixelRect(card.offsetBy(dx: 14, dy: -14), color(0x02070b).withAlphaComponent(0.42))
-    drawPixelRect(card, color(0x26313b))
-    drawPixelRect(card.insetBy(dx: 5, dy: 5), color(0xede9df))
+    drawPixelRect(card, color(0x6b4429))
+    drawPixelRect(card.insetBy(dx: 6, dy: 6), color(0xb8793d))
+    drawPixelRect(card.insetBy(dx: 10, dy: 10), color(0xffe7a8))
   }
 
   private func drawPixelRect(_ rect: NSRect, _ fill: NSColor) {

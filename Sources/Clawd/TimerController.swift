@@ -27,6 +27,7 @@ final class TimerController {
   private var breakActive = false
   private var warningActive = false
   private var workModeActive = false
+  private var autoResumeWorkAfterBreak = false
   private var bedtimeSuspended = false
   private var workAnimationStarted = false
   private var lastAnimationName = ""
@@ -67,6 +68,7 @@ final class TimerController {
     settings.enabled = true
     bedtimeSuspended = false
     workModeActive = true
+    autoResumeWorkAfterBreak = true
     startWorkCycle(resetStart: true)
   }
 
@@ -78,12 +80,14 @@ final class TimerController {
     settings.enabled = true
     bedtimeSuspended = false
     workModeActive = false
+    autoResumeWorkAfterBreak = false
     enterIdleMode(showPet: true)
   }
 
   func suspendForBedtime() {
     bedtimeSuspended = true
     workModeActive = false
+    autoResumeWorkAfterBreak = false
     enterIdleMode(showPet: false)
   }
 
@@ -100,7 +104,8 @@ final class TimerController {
     settings.enabled = true
     bedtimeSuspended = false
     workModeActive = false
-    startBreak()
+    autoResumeWorkAfterBreak = false
+    startBreak(autoResumeWork: false)
   }
 
   func applySettingsAndRestart() {
@@ -122,6 +127,7 @@ final class TimerController {
     breakActive = false
     warningActive = false
     workModeActive = false
+    autoResumeWorkAfterBreak = false
     bedtimeSuspended = false
     workAnimationStarted = false
     windows.hideAll()
@@ -157,7 +163,7 @@ final class TimerController {
     windows.updateWorkTimer(remainingSeconds: remaining)
 
     guard remaining > 0 else {
-      startBreak()
+      startBreak(autoResumeWork: true)
       return
     }
 
@@ -178,7 +184,11 @@ final class TimerController {
   private func tickBreak() {
     let remaining = max(0, Int(ceil(breakEndsAt.timeIntervalSinceNow)))
     guard remaining > 0 else {
-      enterIdleMode(showPet: true)
+      if autoResumeWorkAfterBreak, settings.enabled, !bedtimeSuspended {
+        startWorkCycle(resetStart: true)
+      } else {
+        enterIdleMode(showPet: true)
+      }
       return
     }
 
@@ -191,6 +201,7 @@ final class TimerController {
     introTimer?.invalidate()
     introTimer = nil
     workModeActive = true
+    autoResumeWorkAfterBreak = true
     breakActive = false
     warningActive = false
     workAnimationStarted = false
@@ -202,10 +213,11 @@ final class TimerController {
     tickWork()
   }
 
-  private func startBreak() {
+  private func startBreak(autoResumeWork: Bool) {
     clearRotationTimer()
     introTimer?.invalidate()
     workModeActive = false
+    autoResumeWorkAfterBreak = autoResumeWork
     breakActive = true
     warningActive = false
     workAnimationStarted = false
@@ -227,6 +239,7 @@ final class TimerController {
     introTimer = nil
     breakActive = false
     warningActive = false
+    autoResumeWorkAfterBreak = false
     workAnimationStarted = false
     windows.hideBreakOverlay()
     windows.hideWorkTimer()

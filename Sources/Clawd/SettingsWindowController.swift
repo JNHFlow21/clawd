@@ -108,7 +108,7 @@ final class SettingsWindowController: NSWindowController {
     languagePopUp.frame = NSRect(x: 180, y: 288, width: 136, height: 30)
     languagePopUp.target = self
     languagePopUp.action = #selector(languageChanged)
-    languagePopUp.font = .monospacedSystemFont(ofSize: 13, weight: .bold)
+    styleLanguagePopUp()
     contentView.addSubview(languagePopUp)
 
     bedtimeTitleLabel.frame = NSRect(x: 28, y: 250, width: 180, height: 22)
@@ -156,7 +156,7 @@ final class SettingsWindowController: NSWindowController {
     contentView.addSubview(label)
 
     field.frame = NSRect(x: 180, y: y, width: 90, height: 28)
-    field.alignment = .right
+    field.alignment = .center
     styleTextField(field)
     contentView.addSubview(field)
   }
@@ -194,6 +194,7 @@ final class SettingsWindowController: NSWindowController {
     if let index = AppLanguage.allCases.firstIndex(of: language) {
       languagePopUp.selectItem(at: index)
     }
+    styleLanguagePopUp()
   }
 
   private func applyLanguage(_ language: AppLanguage) {
@@ -226,6 +227,7 @@ final class SettingsWindowController: NSWindowController {
 
   @objc private func languageChanged() {
     applyLanguage(selectedLanguage)
+    styleLanguagePopUp()
   }
 
   @objc private func saveClicked() {
@@ -283,15 +285,15 @@ final class SettingsWindowController: NSWindowController {
   }
 
   private var chromeInk: NSColor {
-    NSColor(calibratedRed: 0.15, green: 0.19, blue: 0.23, alpha: 1)
+    NSColor(calibratedRed: 0.25, green: 0.15, blue: 0.1, alpha: 1)
   }
 
   private var chromeMuted: NSColor {
-    NSColor(calibratedRed: 0.36, green: 0.29, blue: 0.24, alpha: 1)
+    NSColor(calibratedRed: 0.48, green: 0.34, blue: 0.23, alpha: 1)
   }
 
   private var chromeButtonFill: NSColor {
-    NSColor(calibratedRed: 0.12, green: 0.19, blue: 0.25, alpha: 1)
+    NSColor(calibratedRed: 0.16, green: 0.28, blue: 0.35, alpha: 1)
   }
 
   private var chromeAccent: NSColor {
@@ -306,6 +308,8 @@ final class SettingsWindowController: NSWindowController {
   private func styleTextField(_ field: NSTextField) {
     field.font = .monospacedDigitSystemFont(ofSize: 14, weight: .heavy)
     field.textColor = .white
+    field.alignment = .center
+    field.cell?.alignment = .center
     field.backgroundColor = chromeButtonFill
     field.isBordered = false
     field.wantsLayer = true
@@ -313,6 +317,40 @@ final class SettingsWindowController: NSWindowController {
     field.layer?.borderColor = NSColor(calibratedRed: 0.04, green: 0.07, blue: 0.09, alpha: 1).cgColor
     field.layer?.borderWidth = 3
     field.layer?.cornerRadius = 0
+  }
+
+  private func styleLanguagePopUp() {
+    languagePopUp.isBordered = false
+    languagePopUp.alignment = .center
+    languagePopUp.font = .monospacedSystemFont(ofSize: 14, weight: .heavy)
+    languagePopUp.contentTintColor = .white
+    languagePopUp.wantsLayer = true
+    languagePopUp.layer?.backgroundColor = chromeButtonFill.cgColor
+    languagePopUp.layer?.borderColor = NSColor(calibratedRed: 0.04, green: 0.07, blue: 0.09, alpha: 1).cgColor
+    languagePopUp.layer?.borderWidth = 3
+    languagePopUp.layer?.cornerRadius = 0
+
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = .center
+    let titleAttributes: [NSAttributedString.Key: Any] = [
+      .font: NSFont.monospacedSystemFont(ofSize: 14, weight: .heavy),
+      .foregroundColor: NSColor.white,
+      .paragraphStyle: paragraphStyle
+    ]
+
+    for item in languagePopUp.itemArray {
+      item.attributedTitle = NSAttributedString(
+        string: item.title,
+        attributes: titleAttributes
+      )
+    }
+
+    if let title = languagePopUp.selectedItem?.title {
+      languagePopUp.attributedTitle = NSAttributedString(
+        string: title,
+        attributes: titleAttributes
+      )
+    }
   }
 
   private func styleCheckbox(_ checkbox: NSButton) {
