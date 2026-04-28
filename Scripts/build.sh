@@ -8,6 +8,13 @@ MACOS_DIR="$CONTENTS_DIR/MacOS"
 RESOURCES_DIR="$CONTENTS_DIR/Resources"
 MODULE_CACHE_DIR="$ROOT/build/ModuleCache"
 TMP_DIR="$ROOT/build/tmp"
+SIGNING_DIR="$(mktemp -d /tmp/clawd-signing.XXXXXX)"
+SIGNING_APP="$SIGNING_DIR/Clawd.app"
+
+cleanup() {
+  rm -rf "$SIGNING_DIR"
+}
+trap cleanup EXIT
 
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR/Animations" "$MODULE_CACHE_DIR" "$TMP_DIR"
 rm -rf "$CONTENTS_DIR/_CodeSignature"
@@ -39,6 +46,15 @@ cp "$ROOT/Resources/AppIcon.icns" "$RESOURCES_DIR/AppIcon.icns"
 cp -R "$ROOT/Resources/Animations/." "$RESOURCES_DIR/Animations/"
 
 xattr -cr "$APP_DIR"
-codesign --force --deep --sign - "$APP_DIR" >/dev/null
+rm -rf "$SIGNING_APP"
+ditto --noextattr --norsrc "$APP_DIR" "$SIGNING_APP"
+xattr -cr "$SIGNING_APP"
+codesign --force --deep --sign - "$SIGNING_APP" >/dev/null
+codesign --verify --deep --strict "$SIGNING_APP" >/dev/null
+rm -rf "$APP_DIR"
+ditto --noextattr --norsrc "$SIGNING_APP" "$APP_DIR"
+find "$APP_DIR" -exec xattr -d com.apple.FinderInfo {} \; 2>/dev/null || true
+find "$APP_DIR" -exec xattr -d com.apple.ResourceFork {} \; 2>/dev/null || true
+find "$APP_DIR" -exec xattr -d 'com.apple.fileprovider.fpfs#P' {} \; 2>/dev/null || true
 
 echo "Built $APP_DIR"
