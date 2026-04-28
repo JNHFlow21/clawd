@@ -22,16 +22,16 @@ final class TimeWheelPickerView: NSView {
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
     wantsLayer = true
-    layer?.backgroundColor = NSColor.controlBackgroundColor.withAlphaComponent(0.8).cgColor
-    layer?.cornerRadius = 7
-    layer?.borderColor = NSColor.separatorColor.cgColor
-    layer?.borderWidth = 1
+    layer?.backgroundColor = NSColor(calibratedRed: 0.12, green: 0.19, blue: 0.25, alpha: 1).cgColor
+    layer?.cornerRadius = 0
+    layer?.borderColor = NSColor(calibratedRed: 0.04, green: 0.07, blue: 0.09, alpha: 1).cgColor
+    layer?.borderWidth = 3
 
     configureLabel(hourLabel)
     configureLabel(minuteLabel)
     colonLabel.alignment = .center
-    colonLabel.font = .monospacedDigitSystemFont(ofSize: 16, weight: .semibold)
-    colonLabel.textColor = .secondaryLabelColor
+    colonLabel.font = .monospacedDigitSystemFont(ofSize: 16, weight: .heavy)
+    colonLabel.textColor = .white
 
     configureStepper(hourStepper, max: 23)
     configureStepper(minuteStepper, max: 59)
@@ -68,11 +68,11 @@ final class TimeWheelPickerView: NSView {
 
   private func configureLabel(_ label: NSTextField) {
     label.alignment = .center
-    label.font = .monospacedDigitSystemFont(ofSize: 16, weight: .semibold)
-    label.textColor = .labelColor
+    label.font = .monospacedDigitSystemFont(ofSize: 16, weight: .heavy)
+    label.textColor = .white
     label.wantsLayer = true
-    label.layer?.backgroundColor = NSColor.textBackgroundColor.withAlphaComponent(0.75).cgColor
-    label.layer?.cornerRadius = 5
+    label.layer?.backgroundColor = NSColor.clear.cgColor
+    label.layer?.cornerRadius = 0
   }
 
   private func configureStepper(_ stepper: NSStepper, max: Double) {

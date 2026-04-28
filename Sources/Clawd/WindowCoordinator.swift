@@ -231,10 +231,13 @@ final class WindowCoordinator {
 
     for screen in NSScreen.screens {
       let visibleFrame = screen.visibleFrame
-      let size = NSSize(width: min(520, visibleFrame.width - 48), height: 92)
+      let size = NSSize(
+        width: min(820, max(360, visibleFrame.width - 96)),
+        height: min(310, max(210, visibleFrame.height * 0.28))
+      )
       let origin = NSPoint(
         x: visibleFrame.midX - size.width / 2,
-        y: visibleFrame.maxY - size.height - 42
+        y: visibleFrame.maxY - size.height - 64
       )
       let panel = NSPanel(
         contentRect: NSRect(origin: origin, size: size),
@@ -250,21 +253,8 @@ final class WindowCoordinator {
       panel.collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
       panel.hidesOnDeactivate = false
 
-      let root = NSView(frame: NSRect(origin: .zero, size: size))
-      root.wantsLayer = true
-      root.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.82).cgColor
-      root.layer?.cornerRadius = 10
-
-      let label = NSTextField(labelWithString: message)
-      label.frame = root.bounds.insetBy(dx: 24, dy: 14)
-      label.autoresizingMask = [.width, .height]
-      label.alignment = .center
-      label.lineBreakMode = .byWordWrapping
-      label.maximumNumberOfLines = 2
-      label.textColor = NSColor(calibratedRed: 1.0, green: 0.94, blue: 0.72, alpha: 1)
-      label.font = .monospacedSystemFont(ofSize: 19, weight: .heavy)
-      root.addSubview(label)
-
+      let root = PixelNoticeBoardView(frame: NSRect(origin: .zero, size: size), message: message)
+      root.autoresizingMask = [.width, .height]
       panel.contentView = root
       bedtimeReminderWindows.append(panel)
       panel.orderFrontRegardless()
