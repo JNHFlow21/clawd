@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clawd README Showcase</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f9f5e8;
+      --muted: #b9c3bf;
+      --panel: #111820;
+      --panel-2: #192532;
+      --accent: #ffca55;
+      --blue: #8ed5ff;
+      --red: #f06b57;
+      --green: #92d88e;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0a0f14;
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .page {
+      width: 1440px;
+      min-height: 960px;
+      padding: 64px;
+      background:
+        linear-gradient(180deg, rgba(29, 46, 58, 0.92), rgba(10, 15, 20, 1)),
+        radial-gradient(circle at 15% 10%, rgba(142, 213, 255, 0.22), transparent 34%);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: 82px;
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .tagline {
+      max-width: 650px;
+      margin: 0 0 34px;
+      color: var(--muted);
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip {
+      padding: 12px 16px;
+      border: 2px solid rgba(249, 245, 232, 0.24);
+      background: rgba(0, 0, 0, 0.24);
+      color: var(--ink);
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .workspace {
+      position: relative;
+      height: 620px;
+      border: 4px solid rgba(249, 245, 232, 0.16);
+      background: linear-gradient(145deg, #111820, #0b1117);
+      overflow: hidden;
+    }
+
+    .menu-bar {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(0, 0, 0, 0.58);
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 18px;
+    }
+
+    .window {
+      position: absolute;
+      left: 42px;
+      top: 96px;
+      width: 650px;
+      height: 420px;
+      background: #10161d;
+      border: 3px solid #2f3b46;
+      box-shadow: 18px 18px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    .window-header {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 14px;
+      background: #1e2c38;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .dot:nth-child(2) { background: var(--accent); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .fake-lines {
+      padding: 36px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .line {
+      height: 24px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .line:nth-child(2) { width: 82%; }
+    .line:nth-child(3) { width: 66%; }
+    .line:nth-child(4) { width: 74%; }
+    .line:nth-child(5) { width: 52%; }
+
+    .timer {
+      position: absolute;
+      left: 28px;
+      top: 72px;
+      padding: 14px 22px;
+      background: rgba(0, 0, 0, 0.42);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .board {
+      position: absolute;
+      left: 28px;
+      bottom: 28px;
+      width: 290px;
+      height: 430px;
+      background: #ffe7a8;
+      border: 12px solid #8a5a2c;
+      box-shadow: inset 0 0 0 8px #bf833e;
+      color: #4a3022;
+      padding: 34px 28px;
+      font-weight: 900;
+    }
+
+    .board h2 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .todo {
+      margin: 22px 0;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .todo::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: var(--red);
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .pet-card {
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      width: 290px;
+      height: 290px;
+    }
+
+    .pixel-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .section-title {
+      margin: 58px 0 22px;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .mini {
+      height: 190px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      padding: 8px;
+    }
+
+    .mini label {
+      display: block;
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pixel {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #cf6d58;
+      box-shadow:
+        16px 0 #cf6d58, 32px 0 #cf6d58, 48px 0 #cf6d58, 64px 0 #cf6d58,
+        -16px 16px #cf6d58, 0 16px #cf6d58, 16px 16px #cf6d58, 32px 16px #cf6d58, 48px 16px #cf6d58, 64px 16px #cf6d58, 80px 16px #cf6d58,
+        0 32px #cf6d58, 16px 32px #cf6d58, 32px 32px #cf6d58, 48px 32px #cf6d58, 64px 32px #cf6d58,
+        0 48px #cf6d58, 16px 48px #cf6d58, 32px 48px #cf6d58, 48px 48px #cf6d58, 64px 48px #cf6d58,
+        0 64px #cf6d58, 16px 64px transparent, 32px 64px #cf6d58, 48px 64px transparent, 64px 64px #cf6d58,
+        16px -16px #f5b8cc, 32px -16px #f5b8cc,
+        16px -32px #f5b8cc,
+        0 -48px #fff3a1,
+        48px 16px #000,
+        0 16px #000;
+    }
+
+    .mug {
+      position: absolute;
+      width: 70px;
+      height: 54px;
+      background: #ecf6fb;
+      border-top: 12px solid #704321;
+      right: 38px;
+      bottom: 84px;
+      box-shadow: 26px 14px #ecf6fb;
+    }
+
+    .mug::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 16px;
+      width: 16px;
+      height: 16px;
+      background: #62b4d3;
+    }
+
+    .book {
+      position: absolute;
+      width: 112px;
+      height: 64px;
+      right: 40px;
+      bottom: 54px;
+      background: linear-gradient(90deg, #f4e9cf 0 48%, #d9d2c7 48% 52%, #f9f4e4 52%);
+      border: 10px solid #8a5a2c;
+    }
+
+    .sun {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      right: 36px;
+      top: 44px;
+      background: #ffd75a;
+      box-shadow: 0 0 0 10px rgba(255, 215, 90, 0.12);
+    }
+
+    .road {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 36px;
+      height: 18px;
+      background: #66727d;
+    }
+
+    .mini .pixel {
+      transform: scale(0.78);
+      transform-origin: left top;
+      left: 84px;
+      top: 78px;
+    }
+
+    .pet-card .pixel {
+      left: 68px;
+      top: 112px;
+    }
+
+    .overlay-shot {
+      height: 420px;
+      background: rgba(0, 0, 0, 0.82);
+      border: 3px solid rgba(255, 255, 255, 0.16);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .overlay-shot iframe {
+      position: absolute;
+      inset: 0;
+    }
+
+    .overlay-copy {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 36px;
+      text-align: center;
+      font-size: 34px;
+      font-weight: 900;
+      color: #ffe78d;
+      text-shadow: 4px 4px #9a3028;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <h1>Clawd</h1>
+        <p class="tagline">A pixel desktop companion that combines Pomodoro breaks, Apple Reminders, and a strict bedtime guard for people who work alone at a computer all day.</p>
+        <div class="chips">
+          <span class="chip">Todo board</span>
+          <span class="chip">Pomodoro timer</span>
+          <span class="chip">Desktop pet</span>
+          <span class="chip">Forced rest overlay</span>
+          <span class="chip">Bedtime guard</span>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="menu-bar">
+          <strong>Clawd 29:44</strong>
+          <span>Start Work · Rest Mode · Settings</span>
+        </div>
+        <div class="window">
+          <div class="window-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="fake-lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="timer">29:44</div>
+        <div class="board">
+          <h2>REMINDERS</h2>
+          <div class="todo">ship the DMG</div>
+          <div class="todo">walk for 3 min</div>
+          <div class="todo">sleep at 10:30</div>
+        </div>
+        <div class="pet-card">
+          <div class="pixel-scene">
+            <div class="pixel"></div>
+            <div class="mug"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">Original pixel scenes</div>
+    <section class="grid">
+      <div class="mini"><label>Coffee</label><div class="pixel"></div><div class="mug"></div></div>
+      <div class="mini"><label>Keyboard</label><div class="pixel"></div><div class="road"></div></div>
+      <div class="mini"><label>Reading</label><div class="pixel"></div><div class="book"></div></div>
+      <div class="mini"><label>Running</label><div class="sun"></div><div class="pixel"></div><div class="road"></div></div>
+    </section>
+  </main>
+</body>
+</html>

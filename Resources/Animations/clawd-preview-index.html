@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clawd Original Animation Preview</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    color: #1f2328;
+    background: #f6f8fa;
+  }
+  header {
+    max-width: 1180px;
+    margin: 0 auto 18px;
+  }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    line-height: 1.25;
+  }
+  p {
+    margin: 0;
+    color: #57606a;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .card {
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #d0d7de;
+  }
+  .title {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  a {
+    color: #0969da;
+    font-size: 13px;
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+  .stage {
+    aspect-ratio: 1 / 1;
+    background-color: #f2f2f2;
+    background-image:
+      linear-gradient(45deg, #dcdcdc 25%, transparent 25%),
+      linear-gradient(-45deg, #dcdcdc 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #dcdcdc 75%),
+      linear-gradient(-45deg, transparent 75%, #dcdcdc 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Clawd 原创动画预览</h1>
+  <p>下面是 12 个工作阶段动画的原 HTML 动态预览。棋盘格只是为了看清透明背景，实际 App 里不会显示棋盘格。点 “单独打开” 可以看某一个动画的大图。</p>
+</header>
+
+<main class="grid">
+  <section class="card">
+    <div class="card-header"><span class="title">01 喝咖啡</span><a href="clawd-coffee.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-coffee.html?v=20260428c" title="Clawd Coffee"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">02 敲键盘</span><a href="clawd-keyboard.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-keyboard.html?v=20260428c" title="Clawd Keyboard"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">03 看书</span><a href="clawd-reading.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-reading.html?v=20260428c" title="Clawd Reading"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">04 拉伸</span><a href="clawd-stretch.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-stretch.html?v=20260428c" title="Clawd Stretch"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">05 冥想</span><a href="clawd-meditation.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-meditation.html?v=20260428c" title="Clawd Meditation"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">06 收拾桌面</span><a href="clawd-tidy-desk.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-tidy-desk.html?v=20260428c" title="Clawd Tidy Desk"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">07 举牌加油</span><a href="clawd-cheer-sign.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-cheer-sign.html?v=20260428c" title="Clawd Cheer Sign"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">08 健身</span><a href="clawd-fitness.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-fitness.html?v=20260428c" title="Clawd Fitness"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">09 午休</span><a href="clawd-sleep.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-sleep.html?v=20260428c" title="Clawd Nap"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">10 跑步</span><a href="clawd-running.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-running.html?v=20260428c" title="Clawd Running"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">11 游泳</span><a href="clawd-swimming.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-swimming.html?v=20260428c" title="Clawd Swimming"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">12 发呆</span><a href="clawd-daydream.html?v=20260428c" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-daydream.html?v=20260428c" title="Clawd Daydream"></iframe></div>
+  </section>
+  <section class="card">
+    <div class="card-header"><span class="title">睡前霸屏动画</span><a href="clawd-bedtime.html?v=20260428f" target="_blank">单独打开</a></div>
+    <div class="stage"><iframe src="clawd-bedtime.html?v=20260428f" title="Clawd Bedtime"></iframe></div>
+  </section>
+</main>
+</body>
+</html>

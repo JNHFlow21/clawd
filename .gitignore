@@ -1,0 +1,12 @@
+.DS_Store
+Resources/.AppIcon.icns-*
+*.xcuserstate
+*.swp
+
+build/
+output/
+DerivedData/
+
+*.dmg
+*.zip
+*.app
