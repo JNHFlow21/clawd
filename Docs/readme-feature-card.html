@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clawd README Feature Card</title>
+  <style>
+    * { box-sizing: border-box; }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #0b1117;
+      color: #fff7df;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .card {
+      position: relative;
+      width: 560px;
+      height: 420px;
+      padding: 20px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #14202a, #0b1117 70%);
+      border: 4px solid #2e4051;
+    }
+
+    .title {
+      position: absolute;
+      left: 22px;
+      top: 18px;
+      z-index: 5;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.56);
+      border: 3px solid rgba(255, 255, 255, 0.14);
+      color: #ffe58f;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .desktop {
+      position: absolute;
+      inset: 64px 24px 22px;
+      overflow: hidden;
+      background: #0f1820;
+      border: 3px solid #324553;
+    }
+
+    .window {
+      position: absolute;
+      left: 28px;
+      top: 34px;
+      width: 334px;
+      height: 208px;
+      background: #101820;
+      border: 3px solid #3b4f5d;
+      box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    .window::before {
+      content: "";
+      display: block;
+      height: 30px;
+      background: #20313d;
+      border-bottom: 3px solid #3b4f5d;
+      box-shadow: 18px 9px #e06b57, 42px 9px #ffca55, 66px 9px #92d88e;
+    }
+
+    .line {
+      height: 16px;
+      margin: 16px 24px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .line:nth-child(2) { width: 72%; }
+    .line:nth-child(3) { width: 58%; }
+    .line:nth-child(4) { width: 78%; }
+
+    .timer {
+      position: absolute;
+      left: 24px;
+      top: 24px;
+      z-index: 3;
+      padding: 8px 14px;
+      background: rgba(0, 0, 0, 0.42);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .iframe-pet {
+      position: absolute;
+      right: 18px;
+      bottom: 4px;
+      width: 220px;
+      height: 220px;
+      border: 0;
+      background: transparent;
+    }
+
+    .board {
+      position: absolute;
+      left: 112px;
+      top: 50px;
+      width: 336px;
+      height: 318px;
+      padding: 34px 34px 44px;
+      background: #ffe7a8;
+      border: 12px solid #8a5a2c;
+      box-shadow: inset 0 0 0 8px #bf833e;
+      color: #4a3022;
+      font-weight: 900;
+    }
+
+    .board h2 {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .board .count {
+      margin: 0 0 18px;
+      text-align: center;
+      color: #8b674c;
+      font-size: 16px;
+    }
+
+    .todo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      font-size: 18px;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .todo::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      background: #ef705e;
+    }
+
+    .legs {
+      position: absolute;
+      left: 136px;
+      bottom: 24px;
+      width: 36px;
+      height: 54px;
+      background: #8a5a2c;
+      box-shadow: 252px 0 #8a5a2c;
+    }
+
+    .collapse-tab {
+      position: absolute;
+      right: 64px;
+      top: 174px;
+      width: 42px;
+      height: 76px;
+      background: #ffca55;
+      border: 5px solid #8a5a2c;
+      color: #4a3022;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.84);
+    }
+
+    .overlay iframe {
+      position: absolute;
+      left: 80px;
+      top: 8px;
+      width: 400px;
+      height: 310px;
+      border: 0;
+      background: transparent;
+    }
+
+    .message {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 36px;
+      z-index: 5;
+      text-align: center;
+      color: #ffe58f;
+      text-shadow: 4px 4px #8d3027;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.16;
+    }
+
+    .settings {
+      position: absolute;
+      left: 66px;
+      top: 48px;
+      width: 428px;
+      height: 356px;
+      padding: 20px 28px;
+      color: #1f2a33;
+      background: #f4f1e8;
+      border: 5px solid #26313b;
+      box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.28);
+    }
+
+    .settings h2 {
+      margin: 0 0 14px;
+      color: #26313b;
+      font-size: 26px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 9px 0;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .pill {
+      min-width: 96px;
+      padding: 5px 10px;
+      text-align: center;
+      color: #fff7df;
+      background: #243646;
+      border: 3px solid #0f1820;
+    }
+
+    .warning {
+      position: absolute;
+      left: 76px;
+      top: 108px;
+      width: 408px;
+      padding: 26px 28px;
+      background: #ffecad;
+      border: 8px solid #8a5a2c;
+      box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.34);
+      color: #4a3022;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.35;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="card" id="card"></main>
+
+  <script>
+    const type = new URLSearchParams(window.location.search).get("type") || "work";
+    const card = document.getElementById("card");
+
+    const templates = {
+      work: `
+        <div class="title">工作模式</div>
+        <div class="desktop">
+          <div class="timer">29:44</div>
+          <div class="window"><div class="line"></div><div class="line"></div><div class="line"></div></div>
+          <iframe class="iframe-pet" src="../Resources/Animations/clawd-keyboard.html"></iframe>
+        </div>
+      `,
+      reminders: `
+        <div class="title">Todo List / Reminders</div>
+        <div class="legs"></div>
+        <div class="board">
+          <h2>REMINDERS</h2>
+          <div class="count">5 open reminders</div>
+          <div class="todo">完成 Clawd README</div>
+          <div class="todo">上传 GitHub Release</div>
+          <div class="todo">晚上 10:30 休息</div>
+          <div class="todo">站起来活动 3 分钟</div>
+          <div class="todo">检查明天的任务</div>
+        </div>
+        <div class="collapse-tab">‹</div>
+      `,
+      break: `
+        <div class="title">强制休息</div>
+        <div class="overlay">
+          <iframe src="../Resources/Animations/clawd-alarm-break.html"></iframe>
+          <div class="message">STAND UP!!!<br>TAKE A REST</div>
+        </div>
+      `,
+      bedtime: `
+        <div class="title">睡眠守护</div>
+        <div class="overlay">
+          <iframe src="../Resources/Animations/clawd-bedtime.html"></iframe>
+          <div class="message">TIME TO SLEEP<br>身体第一位</div>
+        </div>
+      `,
+      settings: `
+        <div class="title">设置面板</div>
+        <div class="settings">
+          <h2>Clawd Settings</h2>
+          <div class="row"><span>Language</span><span class="pill">中文 / EN</span></div>
+          <div class="row"><span>Work block</span><span class="pill">30 min</span></div>
+          <div class="row"><span>Break block</span><span class="pill">3 min</span></div>
+          <div class="row"><span>Bedtime</span><span class="pill">22:30</span></div>
+          <div class="row"><span>Wake window</span><span class="pill">05:00</span></div>
+          <div class="row"><span>Reminders board</span><span class="pill">ON</span></div>
+        </div>
+      `,
+      warning: `
+        <div class="title">睡前提醒</div>
+        <div class="warning">
+          还有 30 分钟到睡觉时间。<br>
+          现在该收尾、洗漱、准备休息了。
+        </div>
+        <iframe class="iframe-pet" src="../Resources/Animations/clawd-sleep.html"></iframe>
+      `
+    };
+
+    card.innerHTML = templates[type] || templates.work;
+  </script>
+</body>
+</html>

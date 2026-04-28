@@ -1,21 +1,56 @@
-MIT License
+Clawd Non-Commercial Source License
 
-Copyright (c) 2026 Rising Jerrys
+Copyright (c) 2026 risingjerrys
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Author: @risingjerrys
+Author URL: https://x.com/risingjerrys
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license allows personal, educational, research, and other non-commercial
+use of Clawd. Commercial use is not allowed unless you receive prior explicit
+permission from the author.
+
+1. Permitted Use
+
+You may use, copy, study, modify, fork, and redistribute this software and
+modified versions of it for non-commercial purposes.
+
+You may share modified versions as long as this license notice and the author
+credit remain included.
+
+2. No Commercial Use
+
+You may not use this software, modified versions of it, or substantial parts of
+it for commercial purposes without prior explicit permission from the author.
+
+Commercial use includes, but is not limited to:
+
+- selling the software or a modified version;
+- bundling it with a paid product;
+- using it as part of a paid service;
+- using it in a product, workflow, or service primarily intended to generate
+  revenue;
+- using the Clawd name, icon, screenshots, animations, or product identity in a
+  commercial product.
+
+For commercial permission, contact the author:
+
+https://x.com/risingjerrys
+
+3. Attribution
+
+You must keep the copyright notice, this license, and the author credit in all
+copies or substantial portions of the software.
+
+4. No Trademark or Endorsement Rights
+
+This license does not grant permission to use the author's name, handle, brand,
+or identity to imply endorsement.
+
+5. No Warranty
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

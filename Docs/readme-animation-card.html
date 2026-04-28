@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clawd README Animation Card</title>
+  <style>
+    * { box-sizing: border-box; }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #0b1117;
+      color: #fff7df;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .card {
+      width: 480px;
+      height: 560px;
+      padding: 18px;
+      background: linear-gradient(180deg, #131d26, #0b1117);
+      border: 4px solid #273746;
+    }
+
+    .title {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 4px 12px;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .badge {
+      padding: 8px 10px;
+      background: #ffca55;
+      color: #3b2617;
+      border: 3px solid #9b6832;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .stage {
+      width: 444px;
+      height: 444px;
+      border: 4px solid #405364;
+      background-color: #182330;
+      background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.07) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.07) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.07) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.07) 75%);
+      background-size: 36px 36px;
+      background-position: 0 0, 0 18px, 18px -18px, -18px 0;
+      overflow: hidden;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+    }
+
+    .caption {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      padding-top: 12px;
+      color: #b7c4cd;
+      font-size: 18px;
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="title">
+      <span id="title">Clawd</span>
+      <span class="badge">PIXEL</span>
+    </div>
+    <div class="stage">
+      <iframe id="frame" title="Clawd animation preview"></iframe>
+    </div>
+    <div class="caption" id="caption">transparent HTML animation</div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const src = params.get("src") || "../Resources/Animations/clawd-coffee.html";
+    const title = params.get("title") || "Clawd";
+    const caption = params.get("caption") || "transparent HTML animation";
+    const frame = Number(params.get("frame") || 48);
+
+    document.getElementById("title").textContent = title;
+    document.getElementById("caption").textContent = caption;
+    const iframe = document.getElementById("frame");
+    iframe.src = src;
+    iframe.addEventListener("load", () => {
+      const freeze = () => {
+        const win = iframe.contentWindow;
+        if (!win) return;
+        if (typeof win.render === "function") win.render(frame);
+        win.requestAnimationFrame = () => 0;
+      };
+      freeze();
+      window.setInterval(freeze, 80);
+    });
+  </script>
+</body>
+</html>
