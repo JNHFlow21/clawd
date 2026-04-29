@@ -1,6 +1,6 @@
 # Clawd
 
-作者：[@risingjerrys](https://x.com/risingjerrys)
+作者：risingjerrys
 
 Clawd 是一个给 macOS 用的像素桌面伙伴。它把 Todo List、番茄钟、桌面宠物合在一起，专门解决一个人长期坐在电脑前工作、忘记起身、容易熬夜的问题。
 
@@ -210,6 +210,6 @@ Docs/assets/            README 展示图片
 
 本项目采用非商业授权协议。
 
-你可以个人使用、学习、修改、二次开发、Fork 和分享，但不允许商用。任何商业使用都必须先获得作者 [@risingjerrys](https://x.com/risingjerrys) 的明确同意。
+你可以个人使用、学习、修改、二次开发、Fork 和分享，但不允许商用。任何商业使用都必须先获得作者 risingjerrys 的明确同意。
 
 详细条款见 [LICENSE](LICENSE)。
